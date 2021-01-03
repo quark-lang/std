@@ -14,4 +14,17 @@
       (let i (+ i 1))
     })
   }))
+  /*
+    @name = push
+    @brief = Pushes an element to a list
+    @param = ["el: the list to push",
+              "val: the value to push"]
+    @author = "Wafelack <wafelack@protonmail.com>"
+    @details = Returns the element if it is not a list
+  */
+  (let push (fn (el val) {
+    (if (!= (type el) list) (return el))
+    (let (index el (length el)) val)
+    (return el)
+  }))
 }

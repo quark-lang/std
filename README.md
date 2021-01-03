@@ -32,6 +32,16 @@ It is licensed under the MIT license.
   - cb: the function to apply to the elements
 - @author = Thomas Vergne \<thomas@quark-lang.dev>
 
+### push
+
+- @name = push
+- @brief = Pushes an element to a list
+- @param = 
+  - el: the list to push
+  - val: the value to push
+- @author = Wafelack \<wafelack@protonmail.com>
+- @details = Returns the element if it is not a list
+
 ## misc.qrk
 
 ### length
