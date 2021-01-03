@@ -19,7 +19,7 @@
     @author = "Wafelack <wafelack@protonmail.com>"
   */
   (let print (fn ((list values)) {
-    (print (spread values))
+    (puts (spread values))
     (stdout (newline))
   }))
 }
