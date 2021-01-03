@@ -1,0 +1,10 @@
+{
+  (import "std.ts")
+  (import "foreach.qrk")
+  (let print (fn ((list values)) {
+    (foreach values (fn (item) {
+      (stdout (+ item " "))
+    }))
+    (stdout (newline))
+  }))
+}
