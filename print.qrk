@@ -1,10 +1,13 @@
 {
   (import "std.ts")
   (import "foreach.qrk")
-  (let print (fn ((list values)) {
+  (let puts (fn ((list values)) {
     (foreach values (fn (item) {
       (stdout (+ item " "))
     }))
+  }))
+  (let print (fn ((list values)) {
+    (print (values))
     (stdout (newline))
   }))
 }
