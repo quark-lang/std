@@ -15,7 +15,18 @@ export const module = [
   },
   {
     name: 'newline',
-    func: () => '\n'
+    value: '\n',
+  },
+  {
+    name: 'args',
+    value: Deno.args,
+  },
+  {
+    name: 'type',
+    func: (el: any): string => {
+      if (Array.isArray(el)) return 'list';
+      return typeof el;
+    }
   },
   {
     name: 'input',
