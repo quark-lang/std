@@ -1,11 +1,23 @@
 {
+  /*
+    @name = puts
+    @brief = Displays a message on stdout without newline
+    @param = ["values: the values to display"]
+    @author = "Wafelack <wafelack@protonmail.com>"
+  */
   (import "std.ts")
-  (import "foreach.qrk")
+  (import "list.qrk")
   (let puts (fn ((list values)) {
     (foreach values (fn (item) {
       (stdout (+ item " "))
     }))
   }))
+  /*
+    @name = print
+    @brief = Displays a message on stdout with a newline
+    @param = ["values: the values to display"]
+    @author = "Wafelack <wafelack@protonmail.com>"
+  */
   (let print (fn ((list values)) {
     (print (spread values))
     (stdout (newline))

@@ -1,0 +1,13 @@
+{
+  /*
+    @name = length
+    @brief = returns the element's length
+    @param = ["el: the element"]
+    @author = "Thomas Vergne <thomas@quark-lang.dev>"
+  */
+  (let length (fn (el) {
+    (let i 0)
+    (while (!= (index el i) none) (let i (+ i 1))) # Looping all chars of element
+    i
+  }))
+}

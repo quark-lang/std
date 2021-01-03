@@ -1,5 +1,12 @@
 {
-  (import "length.qrk")
+  /*
+    @name = foreach
+    @brief = Iterates over the elements of a list and applies a function to each
+    @param = ["el: the elements to iterate over",
+              "cb: the function to apply to the elements"]
+    @author = "Thomas Vergne <thomas@quark-lang.dev>"
+  */
+  (import "misc.qrk")
   (let foreach (fn (el cb) {
     (let i 0)
     (while (< i (length el)) {
