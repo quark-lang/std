@@ -1,0 +1,10 @@
+{
+  (import "length.qrk")
+  (let foreach (fn (el cb) {
+    (let i 0)
+    (while (< i (length el)) {
+      (cb (index el i))
+      (let i (+ i 1))
+    })
+  }))
+}
