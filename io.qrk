@@ -7,7 +7,7 @@
     }))
   }))
   (let print (fn ((list values)) {
-    (print (values))
+    (print (spread values))
     (stdout (newline))
   }))
 }
