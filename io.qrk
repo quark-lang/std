@@ -9,7 +9,7 @@
   (import "list.qrk")
   (let puts (fn ((list values)) {
     (foreach values (fn (item) {
-      (stdout (+ item " "))
+      (if (= (type item) "list") (stdout (+ (stringify item) " ")) (stdout (+ item " ")))
     }))
   }))
   /*

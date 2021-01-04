@@ -35,6 +35,10 @@ export const module = [
     }
   },
   {
+    name: 'stringify',
+    func: JSON.stringify
+  },
+  {
     name: 'input',
     func: async (question = '') => {
       const buf = new Uint8Array(1024);
