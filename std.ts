@@ -1,4 +1,6 @@
 import { Interpreter } from '../src/core/interpreter.ts';
+import * as path from 'https://deno.land/std@0.83.0/path/mod.ts';
+
 export const module = [
   {
     name: 'stdout',
@@ -12,6 +14,10 @@ export const module = [
     func: async function(code: string, cwd: string = Deno.cwd()) {
       return await Interpreter.run(code, cwd);
     }
+  },
+  {
+    name: 'root',
+    value: Interpreter.parentDir(path.fromFileUrl(import.meta.url), 2),
   },
   {
     name: 'newline',
