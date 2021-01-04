@@ -9,8 +9,8 @@ export const module = [
   },
   {
     name: 'exec',
-    func: async function(code: string, cwd: string = Deno.cwd(), folder: string = '') {
-      return await Interpreter.run(code, cwd, folder);
+    func: async function(code: string, cwd: string = Deno.cwd()) {
+      return await Interpreter.run(code, cwd);
     }
   },
   {
