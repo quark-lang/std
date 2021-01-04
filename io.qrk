@@ -8,9 +8,9 @@
   (import "std.ts")
   (import "list.qrk")
   (let puts (fn ((list values)) {
-    (foreach values (fn (item) {
-      (if (= (type item) "list") (stdout (+ (stringify item) " ")) (stdout (+ item " ")))
-    }))
+    (foreach values (fn (item)
+      (std:out (+ item " "))
+    ))
   }))
   /*
     @name = print
@@ -20,6 +20,6 @@
   */
   (let print (fn ((list values)) {
     (puts (spread values))
-    (stdout (newline))
+    (std:out (newline))
   }))
 }
