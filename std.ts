@@ -1,6 +1,5 @@
 import { QuarkModule } from '../api/api.ts';
 import { QuarkTypes } from '../api/typings/types.ts';
-import { QuarkCallback } from '../api/typings/callback.ts';
 
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'out',
@@ -10,9 +9,7 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   }
 });
 
-QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
-  name: 'callbackTest',
-  body: async function(name: string, cb: QuarkCallback) {
-    await QuarkModule.createCall(cb, name);
-  }
+QuarkModule.declare(null, QuarkTypes.QuarkVariable, {
+  name: 'newline',
+  value: '\n',
 });
