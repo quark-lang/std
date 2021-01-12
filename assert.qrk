@@ -1,0 +1,3 @@
+{
+  (let assert (fn (el1 el2) (return (= el1 el2))))
+}
