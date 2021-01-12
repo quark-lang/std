@@ -30,3 +30,11 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
     };
   }
 });
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'throw',
+  body: function(message: ValueElement) {
+    if (!message) return;
+    throw 'value' in message ? message.value : '';
+  }
+});
