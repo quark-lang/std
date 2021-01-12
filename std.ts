@@ -4,6 +4,8 @@ import type { StringType, ValueElement } from '../src/core/interpreter.ts';
 import { Interpreter, Types } from '../src/core/interpreter.ts';
 import { Parser } from '../src/core/parser.ts';
 
+import { gray, green, red } from 'https://deno.land/std@0.83.0/fmt/colors.ts';
+
 function getValue(values: ValueElement[]): any {
   let result: any = [];
   for (const value of values) {
@@ -22,6 +24,36 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
       const encodedText: Uint8Array = (new TextEncoder).encode(String(text.value));
       await Deno.stdout.write(encodedText);
     }
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'gray',
+  body: function(message: StringType) {
+    return {
+      type: Types.String,
+      value: gray(message.value),
+    };
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'red',
+  body: function(message: StringType) {
+    return {
+      type: Types.String,
+      value: red(message.value),
+    };
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'green',
+  body: function(message: StringType) {
+    return {
+      type: Types.String,
+      value: green(message.value),
+    };
   }
 });
 
