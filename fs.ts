@@ -27,6 +27,14 @@ QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
   },
 });
 
+QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
+  name: 'root',
+  value: {
+    type: Types.String,
+    value: path.dirname(path.dirname(path.fromFileUrl(import.meta.url))),
+  },
+});
+
 QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
   name: 'join',
   body: function(...paths: StringType[]): StringType {
