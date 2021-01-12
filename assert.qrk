@@ -1,3 +1,6 @@
 {
-  (let assert (fn (el1 el2) (return (= el1 el2))))
+  (let assert (fn (el1 el2) {
+    (if (= el1 el2) (return true))
+    (throw "Assert error:" el1 "is not equal to" (+ el2 "."))
+  }))
 }
