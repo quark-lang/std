@@ -64,9 +64,10 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
 
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'throw',
-  body: function(message: ValueElement) {
+  body: function(...message: ValueElement[]) {
     if (!message) return;
-    throw 'value' in message ? message.value : '';
+    console.log(message.map((arg) => 'value' in arg ? arg.value : arg).join(' '));
+    Deno.exit(0);
   }
 });
 
