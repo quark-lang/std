@@ -7,7 +7,7 @@
   */
   (let length (fn (el) {
     (let i 0)
-    (while (!= (index el i) none) (let i (+ i 1))) # Looping all chars of element
+    (while (!= (index el i) none) (set i (+ i 1))) # Looping all chars of element
     (return i)
   }))
 }
