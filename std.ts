@@ -1,8 +1,19 @@
 import { QuarkModule } from '../api/api.ts';
 import { QuarkTypes } from '../api/typings/types.ts';
-import type { BooleanType, StringType, ValueElement } from '../src/core/interpreter.ts';
+import type { StringType, ValueElement } from '../src/core/interpreter.ts';
 import { Interpreter, Types } from '../src/core/interpreter.ts';
 import { Parser } from '../src/core/parser.ts';
+
+function getValue(values: ValueElement[]): any {
+  let result: any = [];
+  for (const value of values) {
+    if (value.type === Types.List) {
+      result.push(getValue(value.value));
+    } else if ('value' in value) result.push(value.value === undefined ? 'none' : value.value);
+    else result.push('none');
+  }
+  return result;
+}
 
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'out',
@@ -43,9 +54,7 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'print',
   body: async function(...args: any[]) {
-    const values = [];
-    for (const arg of args) values.push(await Interpreter.process(arg));
-    console.log(...values.map((x: any) => x ? x.value : 'none'));
+    console.log(...getValue(args));
     return { type: Types.None, value: undefined };
   }
 });
