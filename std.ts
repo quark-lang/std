@@ -4,7 +4,7 @@ import type { StringType, ValueElement } from '../src/core/interpreter.ts';
 import { Interpreter, Types } from '../src/core/interpreter.ts';
 import { Parser } from '../src/core/parser.ts';
 
-import { gray, green, red } from 'https://deno.land/std@0.83.0/fmt/colors.ts';
+import { gray, green, red, rgb24, white, bold } from 'https://deno.land/std@0.83.0/fmt/colors.ts';
 
 function getValue(values: ValueElement[]): any {
   let result: any = [];
@@ -32,8 +32,18 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   body: function(message: StringType) {
     return {
       type: Types.String,
-      value: gray(message.value),
+      value: rgb24(message.value, 0x808080),
     };
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'white',
+  body: function(message: StringType) {
+    return {
+      type: Types.String,
+      value: rgb24(message.value, 0xffffff),
+    }
   }
 });
 
@@ -44,6 +54,16 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
       type: Types.String,
       value: red(message.value),
     };
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'bold',
+  body: function(message: StringType) {
+    return {
+      type: Types.String,
+      value: bold(message.value),
+    }
   }
 });
 
