@@ -1,10 +1,10 @@
-import { QuarkModule } from '../api/api.ts';
-import { QuarkTypes } from '../api/typings/types.ts';
-import type { StringType, ValueElement } from '../src/core/interpreter.ts';
-import { Interpreter, Types } from '../src/core/interpreter.ts';
-import { Parser } from '../src/core/parser.ts';
+import {QuarkModule} from '../api/api.ts';
+import {QuarkTypes} from '../api/typings/types.ts';
+import type {IntegerType, StringType, ValueElement} from '../src/core/interpreter.ts';
+import {Interpreter, Types} from '../src/core/interpreter.ts';
+import {Parser} from '../src/core/parser.ts';
 
-import { gray, green, red, rgb24, white, bold } from 'https://deno.land/std@0.83.0/fmt/colors.ts';
+import {bold, green, red, rgb24, yellow} from 'https://deno.land/std@0.83.0/fmt/colors.ts';
 
 function getValue(values: ValueElement[]): any {
   let result: any = [];
@@ -27,12 +27,43 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   }
 });
 
+QuarkModule.declare('time', QuarkTypes.QuarkFunction, {
+  name: 'now',
+  body: function(): IntegerType {
+    return {
+      type: Types.Integer,
+      value: Date.now(),
+    };
+  }
+})
+
+QuarkModule.declare('time', QuarkTypes.QuarkFunction, {
+  name: 'sleep',
+  body: async function(time: IntegerType) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, time.value);
+    });
+  }
+})
+
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'gray',
   body: function(message: StringType) {
     return {
       type: Types.String,
       value: rgb24(message.value, 0x808080),
+    };
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'yellow',
+  body: function(message: StringType) {
+    return {
+      type: Types.String,
+      value: yellow(message.value),
     };
   }
 });
