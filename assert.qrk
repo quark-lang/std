@@ -3,12 +3,34 @@
   (let failed 0)
   (let failedDetails (list
   ))
-  (let assert (fn (txt el1 el2) {
+  (let assert:equal (fn (el1 el2) {
     (if (= el1 el2) (set passed (+ passed 1)) {
       (set failed (+ failed 1))
       (push failedDetails (list txt el1 el2))
     })
-    (print "  " (if (= el1 el2) (green "✓ ") (red "✕ ")) txt)
+    (return (list el1 el2))
+  }))
+
+  (let it (fn (txt cb) {
+    (let started (time:now))
+
+    # Assert response
+    (let res (cb))
+    (let el1 (index res 0))
+    (let el2 (index res 1))
+
+    # Elapsed formatting
+    (let elapsed (- (time:now) started))
+    /*
+      < 100ms : green, good
+      > 100ms && < 500ms : yellow, normal
+      > 500ms: red, bad
+    */
+    (let elapsedFormatted (if (< elapsed 100) (green (+ elapsed "ms")) (if (< elapsed 500) (yellow (+ elapsed "ms")) (red (+ elapsed "ms")))))
+
+    # Printing result
+    (print "  " (if (= el1 el2) (green "✓ ") (red "✕ ")) txt (+ "(" (+ elapsedFormatted ")")))
+    (return none)
   }))
 
   (let describe (fn (text tests) {
