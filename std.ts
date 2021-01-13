@@ -116,9 +116,9 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'throw',
   body: function(...message: ValueElement[]) {
-    if (!message) return;
+    if (message.length === 0) return Deno.exit(1);
     console.log(message.map((arg) => 'value' in arg ? arg.value : arg).join(' '));
-    Deno.exit(0);
+    return Deno.exit(1);
   }
 });
 
