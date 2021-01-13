@@ -1,8 +1,14 @@
 {
-  (let i 0)
+  (let passed 0)
+  (let failed 0)
+  (let failedDetails (list
+  ))
   (let assert (fn (txt el1 el2) {
-    (if (= el1 el2) (set i (+ i 1)))
-    (print "  " (if (= el1 el2) (green "✓") (red "✕")) (gray txt))
+    (if (= el1 el2) (set passed (+ passed 1)) {
+      (set failed (+ failed 1))
+      (push failedDetails (list txt el1 el2))
+    })
+    (print "  " (if (= el1 el2) (green "✓ ") (red "✕ ")) (gray txt))
   }))
 
   (let describe (fn (text tests) {
@@ -13,8 +19,18 @@
 
   (let finish (fn () {
     (print)
-    (print " " (green (+ "✓ " (+ i " tests complete"))))
-    (print)
-    (set i 0)
+    (print " " (green (+ "✓ " (+ passed " tests complete"))))
+    (print " " (red (+ "✕ " (+ failed " tests fail"))))
+    (set passed 0)
+    (if (> failed 0) {
+      (print)
+      (foreach failedDetails (fn (fail) {
+        (let failTest (index fail 0))
+        (print (+ (+ i 1) ")") (+ failTest ":"))
+        (print (gray "  - Expected:") (index fail 1))
+        (print (gray "  - Received:") (index fail 2))
+      }))
+      (throw)
+    })
   }))
 }
