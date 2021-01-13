@@ -8,12 +8,12 @@
       (set failed (+ failed 1))
       (push failedDetails (list txt el1 el2))
     })
-    (print "  " (if (= el1 el2) (green "✓ ") (red "✕ ")) (gray txt))
+    (print "  " (if (= el1 el2) (green "✓ ") (red "✕ ")) txt)
   }))
 
   (let describe (fn (text tests) {
     (print)
-    (print (+ " " text ":"))
+    (print (bold (white (+ " " text ":"))))
     (tests)
   }))
 
