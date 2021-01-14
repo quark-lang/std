@@ -26,12 +26,11 @@ QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
     value: Deno.cwd(),
   },
 });
-
 QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
   name: 'root',
   value: {
     type: Types.String,
-    value: path.dirname(path.dirname(path.dirname(path.fromFileUrl(import.meta.url)))),
+    value: path.join('..', '..'),
   },
 });
 
