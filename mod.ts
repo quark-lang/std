@@ -1,3 +1,3 @@
-export * from './fetch.ts';
-export * from './fs.ts';
-export * from './std.ts';
+export * from './core/fetch.ts';
+export * from './core/fs.ts';
+export * from './core/std.ts';

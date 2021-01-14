@@ -1,7 +1,7 @@
-import { File } from '../src/utils/file.ts';
-import { QuarkModule } from '../api/api.ts';
-import { QuarkTypes } from '../api/typings/types.ts';
-import { StringType, Types } from '../src/core/interpreter.ts';
+import { File } from '../../src/utils/file.ts';
+import { QuarkModule } from '../../api/api.ts';
+import { QuarkTypes } from '../../api/typings/types.ts';
+import { StringType, Types } from '../../src/core/interpreter.ts';
 import * as path from 'https://deno.land/std@0.83.0/path/mod.ts';
 
 QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
@@ -31,7 +31,7 @@ QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
   name: 'root',
   value: {
     type: Types.String,
-    value: path.dirname(path.dirname(path.fromFileUrl(import.meta.url))),
+    value: path.dirname(path.dirname(path.dirname(path.fromFileUrl(import.meta.url)))),
   },
 });
 

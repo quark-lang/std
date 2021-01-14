@@ -1,6 +1,6 @@
-import { QuarkModule } from '../api/api.ts';
-import { QuarkTypes } from '../api/typings/types.ts';
-import { StringType, Types } from '../src/core/interpreter.ts';
+import { QuarkModule } from '../../api/api.ts';
+import { QuarkTypes } from '../../api/typings/types.ts';
+import { StringType, Types } from '../../src/core/interpreter.ts';
 
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'fetch',
