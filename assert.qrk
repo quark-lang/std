@@ -1,5 +1,6 @@
 {
   (import "list.qrk")
+
   (let passed 0)
   (let failed 0)
   (let failedDetails (list))
@@ -34,6 +35,7 @@
     (return none)
   }))
 
+  # Function that help screen formatting
   (let describe (fn (text tests) {
     (print)
     (print (bold (white (+ " " text ":"))))
@@ -46,6 +48,7 @@
     (print " " (red (+ "✕ " (+ failed " tests fail"))))
     (set passed 0)
     (print)
+    # Checking if some tests have failed and then printing them
     (if (> failed 0) {
       (foreach failedDetails (fn (fail) {
         (let failTest (index fail 0))
