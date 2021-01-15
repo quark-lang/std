@@ -42,7 +42,7 @@
     (tests)
   }))
 
-  (let finish (fn () {
+  (on:exit (fn () {
     (print)
     (print " " (green (+ "✓ " (+ passed " tests complete"))))
     (print " " (red (+ "✕ " (+ failed " tests fail"))))
