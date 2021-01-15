@@ -1,6 +1,6 @@
 import { QuarkModule } from '../api/api.ts';
 import { QuarkTypes } from '../api/typings/types.ts';
-import { Types } from '../src/core/interpreter.ts';
+import { FunctionType, Types, Function } from '../src/core/interpreter.ts';
 
 async function getRelease(): Promise<string> {
   const github = await fetch('https://api.github.com/repos/quark-lang/quark/releases');
@@ -14,5 +14,14 @@ QuarkModule.declare('quark', QuarkTypes.QuarkVariable, {
   value: {
     type: Types.String,
     value: await getRelease(),
+  }
+});
+
+QuarkModule.declare('on', QuarkTypes.QuarkFunction, {
+  name: 'exit',
+  body: async function(cb: FunctionType) {
+    window.addEventListener('unload', function() {
+      Function.call(cb as FunctionType, []);
+    });
   }
 });
