@@ -1,8 +1,9 @@
 {
+  (import "list.qrk")
   (let passed 0)
   (let failed 0)
-  (let failedDetails (list
-  ))
+  (let failedDetails (list))
+
   (let assert:equal (fn (el1 el2) {
     (if (= el1 el2) (set passed (+ passed 1)) {
       (set failed (+ failed 1))
@@ -44,8 +45,8 @@
     (print " " (green (+ "✓ " (+ passed " tests complete"))))
     (print " " (red (+ "✕ " (+ failed " tests fail"))))
     (set passed 0)
+    (print)
     (if (> failed 0) {
-      (print)
       (foreach failedDetails (fn (fail) {
         (let failTest (index fail 0))
         (print (+ (+ i 1) ")") (+ failTest ":"))
