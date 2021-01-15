@@ -1,10 +1,10 @@
-import {QuarkModule} from '../../api/api.ts';
-import {QuarkTypes} from '../../api/typings/types.ts';
-import type {IntegerType, StringType, ValueElement} from '../../src/core/interpreter.ts';
-import {Interpreter, Types} from '../../src/core/interpreter.ts';
-import {Parser} from '../../src/core/parser.ts';
+import { QuarkModule } from '../../api/api.ts';
+import { QuarkTypes } from '../../api/typings/types.ts';
+import type { IntegerType, StringType, ValueElement } from '../../src/core/interpreter.ts';
+import { Interpreter, Types } from '../../src/core/interpreter.ts';
+import { Parser } from '../../src/core/parser.ts';
 
-import {bold, green, red, rgb24, yellow} from 'https://deno.land/std@0.83.0/fmt/colors.ts';
+import { bold, green, red, rgb24, yellow } from 'https://deno.land/std@0.83.0/fmt/colors.ts';
 
 function getValue(values: ValueElement[]): any {
   let result: any = [];
@@ -35,7 +35,7 @@ QuarkModule.declare('time', QuarkTypes.QuarkFunction, {
       value: Date.now(),
     };
   }
-})
+});
 
 QuarkModule.declare('time', QuarkTypes.QuarkFunction, {
   name: 'sleep',
