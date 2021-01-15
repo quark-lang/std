@@ -1,7 +1,7 @@
 import { QuarkModule } from '../../api/api.ts';
 import { QuarkTypes } from '../../api/typings/types.ts';
 import type { IntegerType, StringType, ValueElement } from '../../src/core/interpreter.ts';
-import { Interpreter, Types } from '../../src/core/interpreter.ts';
+import { Interpreter, Types, isContainer } from '../../src/core/interpreter.ts';
 import { Parser } from '../../src/core/parser.ts';
 
 import { bold, green, red, rgb24, yellow } from 'https://deno.land/std@0.83.0/fmt/colors.ts';
@@ -159,8 +159,10 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
 
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'exec',
-  body: async function(code: StringType): Promise<StringType> {
-    return await Interpreter.process(Parser.parse(code.value));
+  body: async function(code: StringType, global: boolean = true): Promise<StringType> {
+    const ast = Parser.parse(code.value);
+    if (isContainer(ast) && ast.length === 1) return await Interpreter.process(ast[0], undefined, global);
+    return await Interpreter.process(ast, undefined, global);
   }
 });
 
