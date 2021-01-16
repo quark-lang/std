@@ -86,11 +86,14 @@
   }))
 
   (on:exit (fn () {
+    # Printing tests results
     (print)
     (print " " (green (+ "✓ " (+ passed " tests complete"))) (formatTime passedTime))
     (print " " (red (+ "✕ " (+ failed " tests fail"))) (formatTime failedTime))
+
     (set passed 0)
     (print)
+
     # Checking if some tests have failed and then printing them
     (if (> failed 0) {
       (foreach failedDetails (fn (fail) {
@@ -99,6 +102,7 @@
         (print (gray "  - Expected:") (index fail 1))
         (print (gray "  - Received:") (index fail 2))
       }))
+
       (throw)
     })
   }))
