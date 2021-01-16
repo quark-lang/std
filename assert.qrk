@@ -5,12 +5,45 @@
   (let failed 0)
   (let failedDetails (list))
 
+  (let passedTime 0)
+  (let failedTime 0)
+
+  (let describeCount 0)
+
+  (let formatTabs (fn () {
+    (let i 0)
+    (let result "")
+    (while (< i describeCount) {
+      (set result (+ result "  "))
+      (set i (+ i 1))
+    })
+    (return result)
+  }))
+
   (let assert:equal (fn (el1 el2) {
     (if (= el1 el2) (set passed (+ passed 1)) {
       (set failed (+ failed 1))
       (push failedDetails (list txt el1 el2))
     })
-    (return (list el1 el2))
+    (return (list el1 el2 (= el1 el2)))
+  }))
+
+  (let formatTime (fn (elapsed) {
+    (let formattedElapsed (if
+      (< elapsed 50)
+      # Then
+      (green (+ elapsed "ms"))
+      # Else
+      (if
+        (< elapsed 250)
+        # Then
+        (yellow (+ elapsed "ms"))
+        # ELse
+        (red (+ elapsed "ms"))
+      )
+    ))
+    (let format (+ "(" (+ formattedElapsed ")")))
+    (return format)
   }))
 
   (let it (fn (txt cb) {
@@ -20,6 +53,7 @@
     (let res (cb))
     (let el1 (index res 0))
     (let el2 (index res 1))
+    (let result (index res 2))
 
     # Elapsed formatting
     (let elapsed (- (time:now) started))
@@ -28,24 +62,33 @@
       > 100ms && < 500ms : yellow, normal
       > 500ms: red, bad
     */
-    (let elapsedFormatted (if (< elapsed 100) (green (+ elapsed "ms")) (if (< elapsed 500) (yellow (+ elapsed "ms")) (red (+ elapsed "ms")))))
-
+    (if (= result true)
+      (set passedTime (+ passedTime elapsed))
+      (set failedTime (+ failedTime elapsed))
+    )
     # Printing result
-    (print "  " (if (= el1 el2) (green "✓ ") (red "✕ ")) txt (+ "(" (+ elapsedFormatted ")")))
+    (print (+ (formatTabs) " ") (if (= el1 el2) (green "✓ ") (red "✕ ")) txt (formatTime elapsed))
     (return none)
   }))
 
   # Function that help screen formatting
   (let describe (fn (text tests) {
-    (print)
-    (print (bold (white (+ " " text ":"))))
+    (if (= describeCount 0) (print)) # Printing new line if new main describe
+    (set describeCount (+ describeCount 1))
+
+    # Formatting title
+    (let title (bold (white (+ text ":"))))
+    (print (+ (formatTabs) title))
+
+    # Running tests
     (tests)
+    (set describeCount (- describeCount 1))
   }))
 
   (on:exit (fn () {
     (print)
-    (print " " (green (+ "✓ " (+ passed " tests complete"))))
-    (print " " (red (+ "✕ " (+ failed " tests fail"))))
+    (print " " (green (+ "✓ " (+ passed " tests complete"))) (formatTime passedTime))
+    (print " " (red (+ "✕ " (+ failed " tests fail"))) (formatTime failedTime))
     (set passed 0)
     (print)
     # Checking if some tests have failed and then printing them
