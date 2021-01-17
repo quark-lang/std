@@ -1,11 +1,10 @@
 import { QuarkModule, quarkify, QuarkType } from '../../api/api.ts';
-import {QuarkTypes} from '../../api/typings/types.ts';
-import type {IntegerType, StringType, ValueElement} from '../../src/core/interpreter.ts';
-import {Interpreter, isContainer, Types} from '../../src/core/interpreter.ts';
-import {Parser} from '../../src/core/parser.ts';
+import { QuarkTypes } from '../../api/typings/types.ts';
+import type { IntegerType, StringType, ValueElement } from '../../src/core/interpreter.ts';
+import { Interpreter, isContainer, Types } from '../../src/core/interpreter.ts';
+import { Parser } from '../../src/core/parser.ts';
 
-import {bold, green, red, rgb24, yellow} from 'https://deno.land/std@0.83.0/fmt/colors.ts';
-
+// std:out
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'out',
   body: async function(text: ValueElement) {
@@ -16,6 +15,7 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   }
 });
 
+// std:copy
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'copy',
   body: function (element: any) {
@@ -25,6 +25,7 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   }
 });
 
+// time:now
 QuarkModule.declare('time', QuarkTypes.QuarkFunction, {
   name: 'now',
   body: function(): IntegerType {
@@ -35,6 +36,7 @@ QuarkModule.declare('time', QuarkTypes.QuarkFunction, {
   }
 });
 
+// time:sleep
 QuarkModule.declare('time', QuarkTypes.QuarkFunction, {
   name: 'sleep',
   body: async function(time: IntegerType) {
@@ -46,56 +48,7 @@ QuarkModule.declare('time', QuarkTypes.QuarkFunction, {
   }
 })
 
-QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
-  name: 'gray',
-  body: function(message: StringType) {
-    return {
-      type: Types.String,
-      value: rgb24(message.value, 0x808080),
-    };
-  }
-});
-
-QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
-  name: 'yellow',
-  body: function(message: StringType) {
-    return {
-      type: Types.String,
-      value: yellow(message.value),
-    };
-  }
-});
-
-QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
-  name: 'white',
-  body: function(message: StringType) {
-    return {
-      type: Types.String,
-      value: rgb24(message.value, 0xffffff),
-    }
-  }
-});
-
-QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
-  name: 'red',
-  body: function(message: StringType) {
-    return {
-      type: Types.String,
-      value: red(message.value),
-    };
-  }
-});
-
-QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
-  name: 'bold',
-  body: function(message: StringType) {
-    return {
-      type: Types.String,
-      value: bold(message.value),
-    }
-  }
-});
-
+// replace
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'replace',
   body: function(el: StringType, elToRepl: StringType, repl: StringType) {
@@ -106,16 +59,7 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   }
 })
 
-QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
-  name: 'green',
-  body: function(message: StringType) {
-    return {
-      type: Types.String,
-      value: green(message.value),
-    };
-  }
-});
-
+// std:args
 QuarkModule.declare('std', QuarkTypes.QuarkVariable, {
   name: 'args',
   value: {
@@ -124,6 +68,7 @@ QuarkModule.declare('std', QuarkTypes.QuarkVariable, {
   },
 });
 
+// type
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'type',
   body: function(variable: any): ValueElement {
@@ -134,11 +79,13 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   }
 });
 
+// print
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'print',
   body: (...args: ValueElement[]) => quarkify(console.log, ...args),
 });
 
+// input
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'input',
   body: async function(question: StringType): Promise<StringType> {
@@ -154,6 +101,7 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   }
 });
 
+// std:exec
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'exec',
   body: async function(code: StringType, global: boolean = true): Promise<StringType> {
@@ -163,6 +111,7 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   }
 });
 
+// throw
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'throw',
   body: function(...message: ValueElement[]) {
@@ -172,6 +121,7 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   }
 });
 
+// std:run
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'run',
   body: async function(code: StringType, path: StringType) {

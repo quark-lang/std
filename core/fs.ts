@@ -2,9 +2,10 @@ import { File } from '../../src/utils/file.ts';
 import { QuarkModule } from '../../api/api.ts';
 import { QuarkTypes } from '../../api/typings/types.ts';
 import { existsSync } from 'https://deno.land/std/fs/mod.ts';
-import {NoneType, StringType, Types} from '../../src/core/interpreter.ts';
+import { NoneType, StringType, Types } from '../../src/core/interpreter.ts';
 import * as path from 'https://deno.land/std@0.83.0/path/mod.ts';
 
+// fs:read
 QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
   name: 'read',
   body: async function(path: StringType): Promise<StringType | NoneType> {
@@ -19,6 +20,7 @@ QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
   }
 });
 
+// fs:cwd
 QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
   name: 'cwd',
   value: {
@@ -26,6 +28,8 @@ QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
     value: Deno.cwd(),
   },
 });
+
+// fs:root
 QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
   name: 'root',
   value: {
@@ -34,6 +38,7 @@ QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
   },
 });
 
+// fs:join
 QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
   name: 'join',
   body: function(...paths: StringType[]): StringType {
@@ -44,6 +49,7 @@ QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
   }
 });
 
+// fs:dirname
 QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
   name: 'dirname',
   body: function(src: StringType): StringType {
