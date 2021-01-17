@@ -1,4 +1,4 @@
-import {QuarkModule, quarkify} from '../../api/api.ts';
+import { QuarkModule, quarkify, QuarkType } from '../../api/api.ts';
 import {QuarkTypes} from '../../api/typings/types.ts';
 import type {IntegerType, StringType, ValueElement} from '../../src/core/interpreter.ts';
 import {Interpreter, isContainer, Types} from '../../src/core/interpreter.ts';
@@ -108,11 +108,8 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
 
 QuarkModule.declare(null, QuarkTypes.QuarkVariable, {
   name: 'breakline',
-  value: {
-    type: Types.String,
-    value: '\r'
-  }
-})
+  value: QuarkType.string('\r'),
+});
 
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'green',
