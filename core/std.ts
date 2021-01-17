@@ -106,11 +106,6 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   }
 })
 
-QuarkModule.declare(null, QuarkTypes.QuarkVariable, {
-  name: 'breakline',
-  value: QuarkType.string('\r'),
-});
-
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'green',
   body: function(message: StringType) {
@@ -119,14 +114,6 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
       value: green(message.value),
     };
   }
-});
-
-QuarkModule.declare(null, QuarkTypes.QuarkVariable, {
-  name: 'newline',
-  value: {
-    type: Types.String,
-    value: '\n',
-  },
 });
 
 QuarkModule.declare('std', QuarkTypes.QuarkVariable, {
