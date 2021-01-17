@@ -58,7 +58,6 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   }
 });
 
-
 // bold
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'bold',
