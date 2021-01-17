@@ -1,10 +1,10 @@
-import { QuarkModule } from '../../api/api.ts';
-import { QuarkTypes } from '../../api/typings/types.ts';
-import type { IntegerType, StringType, ValueElement } from '../../src/core/interpreter.ts';
-import { Interpreter, Types, isContainer } from '../../src/core/interpreter.ts';
-import { Parser } from '../../src/core/parser.ts';
+import {QuarkModule} from '../../api/api.ts';
+import {QuarkTypes} from '../../api/typings/types.ts';
+import type {IntegerType, StringType, ValueElement} from '../../src/core/interpreter.ts';
+import {Interpreter, isContainer, Types} from '../../src/core/interpreter.ts';
+import {Parser} from '../../src/core/parser.ts';
 
-import { bold, green, red, rgb24, yellow } from 'https://deno.land/std@0.83.0/fmt/colors.ts';
+import {bold, green, red, rgb24, yellow} from 'https://deno.land/std@0.83.0/fmt/colors.ts';
 
 function getValue(values: ValueElement[]): any {
   let result: any = [];
@@ -106,6 +106,24 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
     }
   }
 });
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'replace',
+  body: function(el: StringType, elToRepl: StringType, repl: StringType) {
+    return {
+      type: Types.String,
+      value: el.value.replace(elToRepl.value, repl.value),
+    }
+  }
+})
+
+QuarkModule.declare(null, QuarkTypes.QuarkVariable, {
+  name: 'breakline',
+  value: {
+    type: Types.String,
+    value: '\r'
+  }
+})
 
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'green',
