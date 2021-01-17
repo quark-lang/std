@@ -27,6 +27,15 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   }
 });
 
+QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
+  name: 'copy',
+  body: function (element: any) {
+    return {
+      ...element
+    };
+  }
+});
+
 QuarkModule.declare('time', QuarkTypes.QuarkFunction, {
   name: 'now',
   body: function(): IntegerType {
