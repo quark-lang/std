@@ -1,21 +1,10 @@
-import {QuarkModule} from '../../api/api.ts';
+import {QuarkModule, quarkify} from '../../api/api.ts';
 import {QuarkTypes} from '../../api/typings/types.ts';
 import type {IntegerType, StringType, ValueElement} from '../../src/core/interpreter.ts';
 import {Interpreter, isContainer, Types} from '../../src/core/interpreter.ts';
 import {Parser} from '../../src/core/parser.ts';
 
 import {bold, green, red, rgb24, yellow} from 'https://deno.land/std@0.83.0/fmt/colors.ts';
-
-function getValue(values: ValueElement[]): any {
-  let result: any = [];
-  for (const value of values) {
-    if (value.type === Types.List) {
-      result.push(getValue(value.value));
-    } else if ('value' in value) result.push(value.value === undefined ? 'none' : value.value);
-    else result.push('none');
-  }
-  return result;
-}
 
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'out',
@@ -163,10 +152,7 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
 
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'print',
-  body: async function(...args: any[]) {
-    console.log(...getValue(args));
-    return { type: Types.None, value: undefined };
-  }
+  body: (...args: ValueElement[]) => quarkify(console.log, ...args),
 });
 
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
