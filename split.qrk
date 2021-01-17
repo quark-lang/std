@@ -1,0 +1,17 @@
+{
+  (let split (fn (string delimitor) {
+    (let result (list))
+    (let tmp "")
+    (foreach string (fn (char) {
+      (if (= char delimitor)
+        {
+          (push result tmp)
+          (set tmp "")
+        }
+        (set tmp (+ tmp char))
+      )
+    }))
+    (if (> (length tmp) 0) (push result tmp))
+    (return result)
+  }))
+}
