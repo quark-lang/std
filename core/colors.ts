@@ -1,6 +1,6 @@
-import { QuarkModule } from '../../api/api.ts';
+import { quarkify, QuarkModule } from '../../api/api.ts';
 import { QuarkTypes } from '../../api/typings/types.ts';
-import { StringType, Types } from '../../src/core/interpreter.ts';
+import { StringType, Types, ValueElement } from '../../src/core/interpreter.ts';
 import { bold, green, red, rgb24, yellow } from 'https://deno.land/std@0.83.0/fmt/colors.ts';
 
 // green
@@ -28,12 +28,7 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
 // yellow
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'yellow',
-  body: function(message: StringType) {
-    return {
-      type: Types.String,
-      value: yellow(message.value),
-    };
-  }
+  body: (...args: ValueElement[]) => quarkify(yellow, ...args)
 });
 
 // white
