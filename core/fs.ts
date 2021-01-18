@@ -4,6 +4,7 @@ import { QuarkTypes } from '../../api/typings/types.ts';
 import { existsSync } from 'https://deno.land/std/fs/mod.ts';
 import { NoneType, StringType, Types } from '../../src/core/interpreter.ts';
 import * as path from 'https://deno.land/std@0.83.0/path/mod.ts';
+import { getQuarkFolder } from '../../src/main.ts';
 
 // fs:read
 QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
@@ -34,7 +35,7 @@ QuarkModule.declare('fs', QuarkTypes.QuarkVariable, {
   name: 'root',
   value: {
     type: Types.String,
-    value: path.join('..', '..'),
+    value: await getQuarkFolder(),
   },
 });
 
