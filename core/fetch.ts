@@ -1,4 +1,4 @@
-import { QuarkModule } from '../../api/api.ts';
+import { QuarkModule, QuarkType } from '../../api/api.ts';
 import { QuarkTypes } from '../../api/typings/types.ts';
 import { StringType, Types } from '../../src/core/interpreter.ts';
 
@@ -15,5 +15,14 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
     } catch (exception) {
       throw exception;
     }
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'download',
+  body: async (url: StringType, filename: StringType) => {
+    const data = (await fetch(url.value)).arrayBuffer();
+    await Deno.writeFile(filename.value, new Uint8Array(await data));
+    return filename;
   }
 });
