@@ -1,8 +1,9 @@
-import { QuarkModule } from '../api/api.ts';
+import { QuarkModule, QuarkType } from '../api/api.ts';
 import { QuarkTypes } from '../api/typings/types.ts';
-import { FunctionType, Types, Function } from '../src/core/interpreter.ts';
-import { parseConfiguration, getQuarkFolder } from '../src/main.ts';
+import { Function, FunctionType, StringType, Types } from '../src/core/interpreter.ts';
+import { getQuarkFolder, parseConfiguration } from '../src/main.ts';
 import * as Path from 'https://deno.land/std@0.83.0/path/mod.ts';
+import { File } from '../src/utils/file.ts';
 
 async function getRelease(): Promise<string> {
   const github = await fetch('https://api.github.com/repos/quark-lang/quark/releases');
@@ -21,6 +22,14 @@ QuarkModule.declare('quark', QuarkTypes.QuarkVariable, {
     value: await getRelease(),
   }
 });
+
+QuarkModule.declare('config', QuarkTypes.QuarkFunction, {
+  name: 'parse',
+  body: async function(file: StringType) {
+    const content = await File.read(file.value);
+    return QuarkType.object(parseConfiguration(content));
+  }
+})
 
 QuarkModule.declare('on', QuarkTypes.QuarkFunction, {
   name: 'exit',
