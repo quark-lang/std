@@ -1,6 +1,11 @@
 import { QuarkModule, QuarkType } from '../api/api.ts';
 import { QuarkTypes } from '../api/typings/types.ts';
-import { Function, FunctionType, StringType, Types } from '../src/core/interpreter.ts';
+import { Function } from '../src/core/interpreter.ts';
+import {
+  Types,
+  StringType,
+  FunctionType,
+} from '../src/typings/types.ts';
 import { getQuarkFolder, parseConfiguration } from '../src/main.ts';
 import * as Path from 'https://deno.land/std@0.83.0/path/mod.ts';
 import { File } from '../src/utils/file.ts';

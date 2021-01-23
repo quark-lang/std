@@ -1,8 +1,14 @@
 import { QuarkModule, quarkify } from '../../api/api.ts';
 import { QuarkTypes } from '../../api/typings/types.ts';
-import type { IntegerType, StringType, ValueElement } from '../../src/core/interpreter.ts';
-import { Interpreter, isContainer, Types } from '../../src/core/interpreter.ts';
+import { Interpreter } from '../../src/core/interpreter.ts';
 import { Parser } from '../../src/core/parser.ts';
+import {
+  Types,
+  StringType,
+  IntegerType,
+  ValueElement
+} from '../../src/typings/types.ts';
+import { isContainer } from '../../src/utils/runner.ts';
 
 // std:out
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {

@@ -1,6 +1,9 @@
 import { QuarkModule, QuarkType } from '../../api/api.ts';
 import { QuarkTypes } from '../../api/typings/types.ts';
-import { StringType, Types } from '../../src/core/interpreter.ts';
+import {
+  Types,
+  StringType,
+} from '../../src/typings/types.ts';
 
 // fetch
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
