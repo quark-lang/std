@@ -1,17 +1,17 @@
 {
   (import "list.qrk")
-  (let split (fn (string delimiter) {
+    (let split (fn (string delimitor) {
     (let result (list))
     (let tmp "")
-    (foreach string (fn (char) {
-      (if (= char delimiter)
+    (foreach string {
+      (if (= item delimitor)
         {
           (push result tmp)
           (set tmp "")
         }
-        (set tmp (+ tmp char))
+        (set tmp (+ tmp item))
       )
-    }))
+    })
     (if (> (length tmp) 0) (push result tmp))
     (return result)
   }))
