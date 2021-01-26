@@ -1,6 +1,6 @@
 {
   (import "list.qrk")
-    (let split (fn (string delimitor) {
+  (let split (fn (string delimitor) {
     (let result (list))
     (let tmp "")
     (foreach string {
