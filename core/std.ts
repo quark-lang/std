@@ -118,6 +118,13 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
 });
 
 QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'get',
+  body: function(element: any) {
+    return element.value;
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
   name: 'del',
   args: [
     {
