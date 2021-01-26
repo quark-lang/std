@@ -1,13 +1,8 @@
-import { QuarkModule, quarkify } from '../../api/api.ts';
+import { quarkify, QuarkModule } from '../../api/api.ts';
 import { QuarkTypes } from '../../api/typings/types.ts';
 import { Interpreter } from '../../src/core/interpreter.ts';
 import { Parser } from '../../src/core/parser.ts';
-import {
-  Types,
-  StringType,
-  IntegerType,
-  ValueElement
-} from '../../src/typings/types.ts';
+import { IntegerType, StringType, Types, ValueElement } from '../../src/typings/types.ts';
 import { isContainer } from '../../src/utils/runner.ts';
 
 // std:out
