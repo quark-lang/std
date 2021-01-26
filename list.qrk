@@ -10,7 +10,6 @@
   (let foreach (fn (array (block var) (block body)) {
     (let i 0)
     (let len (length array))
-    (print)
     (while (< i len) {
       (let item (index array i))
       (let (get var) item)
