@@ -1,9 +1,10 @@
 import { quarkify, QuarkModule } from '../../api/api.ts';
 import { QuarkTypes } from '../../api/typings/types.ts';
-import { Interpreter } from '../../src/core/interpreter.ts';
+import { Frame, Interpreter } from '../../src/core/interpreter.ts';
 import { Parser } from '../../src/core/parser.ts';
 import { IntegerType, StringType, Types, ValueElement } from '../../src/typings/types.ts';
 import { isContainer } from '../../src/utils/runner.ts';
+import { Block, Element } from '../../src/typings/block.ts';
 
 // std:out
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
@@ -99,6 +100,45 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
       type: Types.String,
       value: answer.trim(),
     };
+  }
+});
+
+QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
+  name: 'global',
+  args: [
+    {
+      type: 'Word',
+      value: 'block',
+      block: true,
+    }
+  ],
+  body: async function(block: Block | Element) {
+    await Interpreter.process(block, Interpreter.cwd, true);
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'del',
+  args: [
+    {
+      type: 'Word',
+      value: 'variable',
+      block: true,
+    }
+  ],
+  body: function(variable: any) {
+    const reversedStack = [...Frame.stack].reverse();
+    for (const indexStack in reversedStack) {
+      const frame = reversedStack[indexStack];
+      for (const indexFrame in frame.variables) {
+        const item = frame.variables[indexFrame];
+        if (item.name === variable.value) {
+          const stackAddress = Math.abs(Number(indexStack) - Frame.stack.length) - 1;
+          Frame.stack[stackAddress].variables.splice(Number(indexFrame), 1);
+          return;
+        }
+      }
+    }
   }
 });
 
