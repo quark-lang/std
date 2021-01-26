@@ -3,7 +3,7 @@
   (import "split.qrk")
   (let parseConfiguration (fn (content) {
     (let result (list))
-    (foreach (split content "\n")  {
+    (foreach (split content "\n") item {
       (let splitElement (split item "="))
       (let property (index splitElement 0))
       (let value (replace (index splitElement 1) "\r" ""))
@@ -15,7 +15,7 @@
 
   (let getProperty (fn (config property) {
     (let value "")
-    (foreach config {
+    (foreach config item {
       (if (= (index item 0) property) {
         (set value (index item 1))
         (return value)

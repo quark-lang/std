@@ -3,7 +3,7 @@
   (let split (fn (string delimitor) {
     (let result (list))
     (let tmp "")
-    (foreach string {
+    (foreach string item {
       (if (= item delimitor)
         {
           (push result tmp)
