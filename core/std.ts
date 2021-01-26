@@ -110,9 +110,13 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
 // std:exec
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'exec',
-  body: async function(code: StringType, global: boolean = true): Promise<StringType> {
-    const ast = Parser.parse(code.value);
-    if (isContainer(ast) && ast.length === 1) return await Interpreter.process(ast[0], undefined, global);
+  body: async function(code: any, global: boolean = true): Promise<StringType> {
+    const ast = code.type === 'Block'
+      ? code.value
+      : Parser.parse(code.value);
+
+    if (isContainer(ast) && ast.length === 1)
+      return await Interpreter.process(ast[0], undefined, global);
     return await Interpreter.process(ast, undefined, global);
   }
 });
