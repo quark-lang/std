@@ -1,6 +1,7 @@
 {
   (import "list.qrk")
 
+  (let total 0)
   (let passed 0)
   (let failed 0)
   (let failedDetails (list))
@@ -74,6 +75,7 @@
   # Function that help screen formatting
   (let describe (fn (text tests) {
     (if (= describeCount 0) (print)) # Printing new line if new main describe
+    (set total (+ total 1))
     (set describeCount (+ describeCount 1))
 
     # Formatting title
@@ -85,25 +87,27 @@
     (set describeCount (- describeCount 1))
   }))
 
-  (on:exit (fn () {
-    # Printing tests results
-    (print)
-    (print " " (green (+ "✓ " (+ passed " tests complete"))) (formatTime passedTime))
-    (print " " (red (+ "✕ " (+ failed " tests fail"))) (formatTime failedTime))
+  (if (> total 0) {
+    (on:exit (fn () {
+      # Printing tests results
+      (print)
+      (print " " (green (+ "✓ " (+ passed " tests complete"))) (formatTime passedTime))
+      (print " " (red (+ "✕ " (+ failed " tests fail"))) (formatTime failedTime))
 
-    (set passed 0)
-    (print)
+      (set passed 0)
+      (print)
 
-    # Checking if some tests have failed and then printing them
-    (if (> failed 0) {
-      (foreach failedDetails (fn (fail) {
-        (let failTest (index fail 0))
-        (print (+ (+ i 1) ")") (+ failTest ":"))
-        (print (gray "  - Expected:") (index fail 1))
-        (print (gray "  - Received:") (index fail 2))
-      }))
+      # Checking if some tests have failed and then printing them
+      (if (> failed 0) {
+        (foreach failedDetails (fn (fail) {
+          (let failTest (index fail 0))
+          (print (+ (+ i 1) ")") (+ failTest ":"))
+          (print (gray "  - Expected:") (index fail 1))
+          (print (gray "  - Received:") (index fail 2))
+        }))
 
-      (throw)
-    })
-  }))
+        (throw)
+      })
+    }))
+  })
 }
