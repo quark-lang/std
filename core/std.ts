@@ -82,7 +82,7 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
 });
 
 // print
-QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
   name: 'print',
   body: (...args: ValueElement[]) => quarkify(console.log, ...args),
 });
