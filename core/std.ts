@@ -1,10 +1,10 @@
-import { quarkify, QuarkModule } from '../../api/api.ts';
-import { QuarkTypes } from '../../api/typings/types.ts';
-import { Frame, Interpreter } from '../../src/core/interpreter.ts';
-import { Parser } from '../../src/core/parser.ts';
-import { IntegerType, StringType, Types, ValueElement } from '../../src/typings/types.ts';
-import { isContainer } from '../../src/utils/runner.ts';
-import { Block, Element } from '../../src/typings/block.ts';
+import {quarkify, QuarkModule, setValue} from '../../api/api.ts';
+import {QuarkTypes} from '../../api/typings/types.ts';
+import {Frame, Interpreter} from '../../src/core/interpreter.ts';
+import {Parser} from '../../src/core/parser.ts';
+import {IntegerType, StringType, Types, ValueElement} from '../../src/typings/types.ts';
+import {isContainer} from '../../src/utils/runner.ts';
+import {Block, Element} from '../../src/typings/block.ts';
 
 // std:out
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
@@ -14,6 +14,17 @@ QuarkModule.declare('std', QuarkTypes.QuarkFunction, {
       const encodedText: Uint8Array = (new TextEncoder).encode(String(text.value));
       await Deno.stdout.write(encodedText);
     }
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'length',
+  body: function(element: ValueElement) {
+    if (element && 'value' in element)
+      { // @ts-ignore
+        return setValue(element.value.length);
+      }
+    return setValue(undefined);
   }
 });
 
