@@ -1,9 +1,11 @@
 {
+  (import "assert.qrk")
+
   (let benchmark (fn ((block body) name) {
     (print (gray (+ (+ "Starting" (if (= name none) "" (+ " " name))) " benchmark...")))
     (let elapsed (time:now))
     (std:exec body)
     (set elapsed (- (time:now) elapsed))
-    (print (gray (+ "Benchmark taken " (+ (white (+ elapsed "ms")) (gray ".")))))
+    (print (gray (+ "Benchmark finished " (+ (formatTime elapsed) (gray ".")))))
   }))
 }
