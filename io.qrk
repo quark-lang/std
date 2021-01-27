@@ -2,7 +2,7 @@
   (import "list.qrk")
 
   (let print (fn ((list values)) {
-    (foreach values test (std:out (+ test " ")))
+    (foreach values value (std:out (+ value " ")))
     (std:out "\n")
   }))
 }

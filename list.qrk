@@ -6,13 +6,11 @@
               "cb: the function to apply to the elements"]
     @author = "Thomas Vergne <thomas@quark-lang.dev>"
   */
-  (import "misc.qrk")
   (let foreach (fn (array (block var) (block body)) {
     (let i 0)
     (let len (length array))
     (while (< i len) {
-      (let item (index array i))
-      (let (get var) item)
+      (let (get var) (index array i))
       (std:exec body)
       (set i (+ i 1))
     })
