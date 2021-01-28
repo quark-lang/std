@@ -27,4 +27,19 @@
     (set (index el (length el)) item)
     (return el)
   }))
+
+  (let join (fn (arr del) {
+    (set del (if (= del none) "" del))
+    (let res "")
+    (foreach arr el (set res (+ res (+ el del))))
+    (return res)
+  }))
+
+  (let slice (fn (arr start) {
+    (let res (list))
+    (foreach arr el {
+      (if (>= i start) (push res el))
+    })
+    (return (if (= (type arr) "List") res (join res)))
+  }))
 }
