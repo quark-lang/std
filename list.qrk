@@ -35,10 +35,12 @@
     (return res)
   }))
 
-  (let slice (fn (arr start) {
+  (let slice (fn (arr start end) {
     (let res (list))
+    (if (= start none) (return (std:copy arr)))
+    (if (= end none) (set end (length arr)))
     (foreach arr el {
-      (if (>= i start) (push res el))
+      (if (and (>= i start) (<= i end)) (push res el))
     })
     (return (if (= (type arr) "List") res (join res)))
   }))
