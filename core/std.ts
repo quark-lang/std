@@ -1,4 +1,4 @@
-import { quarkify, QuarkModule, setValue } from '../../api/api.ts';
+import { getValue, quarkify, QuarkModule, QuarkType, setValue } from '../../api/api.ts';
 import { QuarkTypes } from '../../api/typings/types.ts';
 import { Frame, Interpreter } from '../../src/core/interpreter.ts';
 import { Parser } from '../../src/core/parser.ts';
@@ -157,6 +157,21 @@ QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
         }
       }
     }
+  }
+});
+
+// throw
+QuarkModule.declare('json', QuarkTypes.QuarkFunction, {
+  name: 'stringify',
+  body: function(message: ValueElement) {
+    return QuarkType.string(JSON.stringify(getValue([message])[0]));
+  }
+});
+
+QuarkModule.declare(null, QuarkTypes.QuarkFunction, {
+  name: 'type',
+  body: function(element: ValueElement): StringType {
+    return QuarkType.string(element.type);
   }
 });
 
