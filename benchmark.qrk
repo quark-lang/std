@@ -7,5 +7,6 @@
     (std:exec body)
     (set elapsed (- (time:now) elapsed))
     (print (gray (+ "Benchmark finished " (+ (formatTime elapsed) (gray ".")))))
+    (return elapsed)
   }))
 }
