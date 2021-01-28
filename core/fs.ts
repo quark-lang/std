@@ -81,6 +81,15 @@ QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
   body: (src: StringType, chmod: IntegerType) => quarkify(Deno.chmodSync, src, chmod),
 });
 
+QuarkModule.declare('process', QuarkTypes.QuarkFunction, {
+  name: 'exec',
+  body: async (cmd: StringType) => {
+    await Deno.run({
+      cmd: cmd.value.split('&&'),
+    });
+  }
+});
+
 QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {
   name: 'basename',
   body: (src: StringType) => quarkify(path.basename, src),
