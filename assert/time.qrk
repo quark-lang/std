@@ -1,0 +1,19 @@
+{
+  (let formatTime (fn (elapsed) {
+    (let formattedElapsed (if
+      (< elapsed 50)
+      # Then
+      (green (+ elapsed "ms"))
+      # Else
+      (if
+        (< elapsed 250)
+        # Then
+        (yellow (+ elapsed "ms"))
+        # ELse
+        (red (+ elapsed "ms"))
+      )
+    ))
+    (let format (+ "(" (+ formattedElapsed ")")))
+    (return format)
+  }))
+}
