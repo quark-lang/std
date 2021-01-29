@@ -1,0 +1,8 @@
+{
+  (import "assert/assert.qrk")
+  (import "configuration/configuration.qrk")
+  (import "io/io.qrk")
+  (import "list/split.qrk")
+  (import "list/list.qrk")
+  (import "benchmark/benchmark.qrk")
+}
