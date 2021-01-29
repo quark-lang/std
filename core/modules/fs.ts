@@ -1,10 +1,10 @@
-import { File } from '../../src/utils/file.ts';
-import { quarkify, QuarkModule } from '../../api/api.ts';
-import { QuarkTypes } from '../../api/typings/types.ts';
+import { File } from '../../../src/utils/file.ts';
+import { quarkify, QuarkModule } from '../../../api/api.ts';
+import { QuarkTypes } from '../../../api/typings/types.ts';
 import { existsSync } from 'https://deno.land/std/fs/mod.ts';
-import { IntegerType, NoneType, StringType, Types, } from '../../src/typings/types.ts';
+import { IntegerType, NoneType, StringType, Types, } from '../../../src/typings/types.ts';
 import * as path from 'https://deno.land/std@0.83.0/path/mod.ts';
-import { getQuarkFolder } from '../../src/main.ts';
+import { getQuarkFolder } from '../../../src/main.ts';
 
 // fs:read
 QuarkModule.declare('fs', QuarkTypes.QuarkFunction, {

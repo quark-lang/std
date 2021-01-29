@@ -1,6 +1,6 @@
-import { quarkify, QuarkModule } from '../../api/api.ts';
-import { QuarkTypes } from '../../api/typings/types.ts';
-import { StringType } from '../../src/typings/types.ts';
+import { quarkify, QuarkModule } from '../../../api/api.ts';
+import { QuarkTypes } from '../../../api/typings/types.ts';
+import { StringType } from '../../../src/typings/types.ts';
 import { bold, green, red, rgb24, yellow } from 'https://deno.land/std@0.83.0/fmt/colors.ts';
 
 // green

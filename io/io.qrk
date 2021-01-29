@@ -1,6 +1,4 @@
 {
-  (import "list.qrk")
-
   (let print (fn ((list values)) {
     (foreach values value
       (std:out (+ (if (= (type value) "List") (json:stringify value) value) " "))

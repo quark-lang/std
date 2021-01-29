@@ -1,14 +1,14 @@
-import { QuarkModule, QuarkType } from '../api/api.ts';
-import { QuarkTypes } from '../api/typings/types.ts';
-import { Function } from '../src/core/interpreter.ts';
+import { QuarkModule, QuarkType } from '../../api/api.ts';
+import { QuarkTypes } from '../../api/typings/types.ts';
+import { Function } from '../../src/core/interpreter.ts';
 import {
   Types,
   StringType,
   FunctionType,
-} from '../src/typings/types.ts';
-import { getQuarkFolder, parseConfiguration } from '../src/main.ts';
+} from '../../src/typings/types.ts';
+import { getQuarkFolder, parseConfiguration } from '../../src/main.ts';
 import * as Path from 'https://deno.land/std@0.83.0/path/mod.ts';
-import { File } from '../src/utils/file.ts';
+import { File } from '../../src/utils/file.ts';
 
 async function getRelease(): Promise<string> {
   const github = await fetch('https://api.github.com/repos/quark-lang/quark/releases');

@@ -1,6 +1,4 @@
 {
-  (import "assert.qrk")
-
   (let benchmark (fn ((block body) name) {
     (print (gray (+ (+ "Starting" (if (= name none) "" (+ " " name))) " benchmark...")))
     (let elapsed (time:now))

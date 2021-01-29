@@ -1,10 +1,10 @@
-import { getValue, quarkify, QuarkModule, QuarkType, setValue } from '../../api/api.ts';
-import { QuarkTypes } from '../../api/typings/types.ts';
-import { Frame, Interpreter } from '../../src/core/interpreter.ts';
-import { Parser } from '../../src/core/parser.ts';
-import { IntegerType, StringType, Types, ValueElement } from '../../src/typings/types.ts';
-import { isContainer } from '../../src/utils/runner.ts';
-import { Block, Element } from '../../src/typings/block.ts';
+import { getValue, quarkify, QuarkModule, QuarkType, setValue } from '../../../api/api.ts';
+import { QuarkTypes } from '../../../api/typings/types.ts';
+import { Frame, Interpreter } from '../../../src/core/interpreter.ts';
+import { Parser } from '../../../src/core/parser.ts';
+import { IntegerType, StringType, Types, ValueElement } from '../../../src/typings/types.ts';
+import { isContainer } from '../../../src/utils/runner.ts';
+import { Block, Element } from '../../../src/typings/block.ts';
 
 // std:out
 QuarkModule.declare('std', QuarkTypes.QuarkFunction, {

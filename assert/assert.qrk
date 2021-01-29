@@ -1,0 +1,9 @@
+{
+  (import "list/list.qrk")
+  (import "test.qrk")
+  (import "time.qrk")
+
+  (let assert:equal (fn (el1 el2) {
+    (return (list el1 el2 (= el1 el2)))
+  }))
+}
